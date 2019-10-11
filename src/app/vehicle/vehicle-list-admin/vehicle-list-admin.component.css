@@ -1,0 +1,46 @@
+.example-container {
+    height: 100%;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .contentFilter{
+      margin: 15px;
+  }
+
+  .form-group{
+      margin-top: 10px;
+  }
+
+  /* .mat-row:hover {
+background-color: lightgrey;
+cursor: pointer;
+  } */
+
+  
+  .select:hover{
+    background-color:#F8F8F8;  
+    cursor: pointer;  
+  } 
+
+  .ibox-content{
+    margin-top: 18px;
+    /* border-radius: 10px; */
+
+  }
+
+  .btnAddVehicle{
+    margin-top: 25px;
+    padding: 7px;   
+    padding-left: 15px;
+    padding-right: 15px; 
+  }
+  

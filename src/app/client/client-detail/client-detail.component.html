@@ -1,0 +1,98 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Mon profil</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a [routerLink]="['../../']">Home</a>
+      </li>
+      <li>
+        Liste client
+      </li>
+      <li class="active">
+        <strong>Profil</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<div class="wrapper wrapper-content">
+  <div class="row animated fadeInRight">
+    <div class="col-md-5">
+
+      <div class="ibox float-e-margins" *ngIf="clientDetail">
+
+        <div class="ibox-title">
+          <h5>Profil</h5>
+        </div>
+
+        <div>
+          <div class="ibox-content no-padding border-left-right">
+
+          </div>
+
+          <div class="ibox-content profile-content">
+            <div style="text-align: center;">
+              <h4><strong>{{ clientDetail.firstName }} {{ clientDetail.surname }}</strong></h4>
+            </div>
+
+            <div id="tab-2" class="tab-pane">
+              <div class="panel-body">
+                <fieldset class="form-horizontal">
+
+                  <div class="form-group"><label class="col-sm-6 control-label">Date de naissance:</label>
+                    <div class="col-sm-6">
+                      {{clientDetail.birthDate |  date: 'dd/MM/yyyy' }}
+                    </div>
+                  </div>
+
+                  <div class="form-group"><label class="col-sm-6 control-label">E-mail:</label>
+                    <div class="col-sm-6">
+                      {{ clientDetail.email }}
+                    </div>
+                  </div>
+
+                  <div class="form-group"><label class="col-sm-6 control-label">Numéro de permis:</label>
+                    <div class="col-sm-6"><input type="text" class="form-control"
+                        [(ngModel)]="clientDetail.driverLicenseNumber">
+                    </div>
+                  </div>
+
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="user-button">
+              <div class="row">
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-primary btn-sm btn-block" (click)="updateClient()">Mettre à
+                    jour</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- tableau -->
+
+    <div class="col-md-7">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+
+          <div class="content">
+            <mat-tab-group>
+              <mat-tab label="Liste des réservations">
+                <div class="wrapper wrapper-content">
+                  <app-booking-list-client></app-booking-list-client>
+                </div>
+                <hr>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>

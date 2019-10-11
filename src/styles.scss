@@ -1,0 +1,23 @@
+/* Import main Inspinia style */
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import "assets/styles/style";
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto,
+    "Helvetica Neue", sans-serif;
+}
+
+.pull-right {
+    float: right;
+}
+
+.clickable-row :hover {
+    cursor: pointer;
+}

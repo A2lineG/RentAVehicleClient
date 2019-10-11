@@ -1,0 +1,62 @@
+<div class="middle-box text-center loginscreen animated fadeInDown">
+  <div>
+    <h3>S'inscrire à Rent A Vehicle</h3>
+    <form class="m-t example-container" role="form" [formGroup]="formRegister" *ngIf="formRegister">
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nom" formControlName="surname">
+        <mat-error *ngIf="formRegister.invalid">Le nom est obligatoire.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Prénom" formControlName="firstName">
+        <mat-error *ngIf="formRegister.invalid">Le prénom est obligatoire.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="picker" placeholder="Date de naissance" formControlName="birthDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="formRegister.invalid">La date de naissance est obligatoire.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput email placeholder="Email" formControlName="email">
+        <mat-error *ngIf="formRegister.invalid">Un email est obligatoire et doit respecter le format adéquat.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Numéro de permis de conduire" formControlName="driverLicenseNumber">
+        <mat-error *ngIf="formRegister.invalid">Le permis de conduire est obligatoire.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Cacher password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="formRegister.invalid">Le mot de passe est obligatoire et doit contenir au minimum 6 caractères.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Cacher password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="formRegister.invalid">La confirmation de mot de passe doit être identique au mot de passe.</mat-error>
+      </mat-form-field>
+
+    <button type="submit" class="btn btn-primary block full-width m-b" (click)="register()" style="margin-top: 10px"
+      [disabled]="formRegister.invalid">S'inscrire</button>
+
+  </form>
+
+
+  <p class="text-muted text-center"><small>Vous possédez déja un compte ?</small></p>
+  <a class="btn btn-sm btn-white btn-block" href="#" [routerLink]="['/login']">Se connecter</a>
+
+  <!-- <p class="m-t"> <small>Rent a vehicle &copy; 2019</small> </p> -->
+</div>
+</div>

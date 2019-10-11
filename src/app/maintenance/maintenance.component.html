@@ -1,0 +1,33 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Calendrier des réservations</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a [routerLink]="['../']">Home</a>
+      </li>
+      <li class="active">
+        <strong>Entretiens</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<!-- Detail -->
+
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="ibox">
+        <div class="ibox-content">
+          <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [events]="maintenances"
+            (eventClick)="eventClick($event)"></full-calendar>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="ibox">
+        <router-outlet></router-outlet>
+    </div>
+    </div>
+  </div>
+</div>

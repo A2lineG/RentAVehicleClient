@@ -1,0 +1,94 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+
+  <div class="sidebar-collapse">
+    <ul class="nav metismenu" id="side-menu">
+
+      <li class="nav-header">
+
+        <div class="profile-element" dropdown *ngIf="!isUser() && !isAdmin()">
+          <a>
+            <span class="block m-t-xs"> <strong class="font-bold">Bienvenue</strong> </span>
+          </a>
+        </div>
+
+        <div class="profile-element" dropdown *ngIf="isUser()">
+          <a dropdownToggle>
+            <span class="block m-t-xs"> <strong class="font-bold">{{ loggedUser.fullName }}</strong> </span>
+          </a>
+          <ul class="animated fadeInRight dropdown-menu" *dropdownMenu>
+            <li><a href="#" (click)="logout()">Se déconnecter</a></li>
+          </ul>
+        </div>
+
+        <div class="profile-element" dropdown *ngIf="isAdmin()">
+          <img alt="image" width="100px" class="img-circle" src="assets/images/saitama_12295.jpg">
+          <a dropdownToggle>
+            <span class="block m-t-xs"> <strong class="font-bold">Saitama</strong> </span>
+            <span class="text-muted text-xs block">Apprenti héro<b class="caret"></b> </span>
+          </a>
+          <ul class="animated fadeInRight dropdown-menu" *dropdownMenu>
+            <li><a href="#" (click)="logout()">Se déconnecter</a></li>
+          </ul>
+        </div>
+        <div class="logo-element">
+
+        </div>
+      </li>
+
+      <!-- Client -->
+
+      <div class="nav" *ngIf="!isAdmin()">
+        <li [ngClass]="{active: activeRoute('vehicles')}"><a [routerLink]="['/vehicles']">
+            <fa name="search"></fa>
+            Rechercher véhicule
+          </a></li>
+        <li [ngClass]="{active: activeRoute('bookings/list')}"><a [routerLink]="['/bookings/list']" *ngIf="isUser()">
+            <fa name="address-card"></fa>
+            Mes réservations
+          </a>
+        </li>
+        <li [ngClass]="{active: activeRoute('clients/detail')}"><a [routerLink]="['/clients/detail']" *ngIf="isUser()">
+            <fa name="user"></fa>
+            Mon compte
+          </a>
+        </li>
+        <li [ngClass]="{active: activeRoute('contact')}"><a [routerLink]="['/contact']">
+            <fa name="phone"></fa>
+            Contact
+          </a>
+        </li>
+      </div>
+
+      <!-- Admin -->
+
+      <div class="nav" *ngIf="isAdmin()">
+
+        <li [ngClass]="{active: activeRoute('dashboard')}"><a [routerLink]="['/dashboard']">
+            <fa name="line-chart"></fa>
+            Dashboard
+          </a></li>
+
+        <li [ngClass]="{active: activeRoute('clients')}"><a [routerLink]="['/clients']">
+            <fa name="user"></fa>
+            Clients
+          </a></li>
+
+        <li [ngClass]="{active: activeRoute('bookings')}"><a [routerLink]="['/bookings/listAdmin']">
+            <fa name="calendar"></fa>
+            Réservations
+          </a></li>
+
+        <li [ngClass]="{active: activeRoute('vehicles')}"><a [routerLink]="['/vehicles/grid']">
+            <fa name="car"></fa>
+            Véhicules
+          </a></li>
+
+        <li [ngClass]="{active: activeRoute('maintenance')}"><a [routerLink]="['/maintenance']">
+            <fa name="wrench"></fa>
+            Entretiens
+          </a></li>
+      </div>
+
+    </ul>
+  </div>
+</nav>

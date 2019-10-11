@@ -1,0 +1,31 @@
+
+
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <h2>Rent A Vehicle</h2>
+
+            <p class="m-t"> <small>Pour tester en mode admin, utilisez les identifiants suivants : </small> </p> 
+            <p class="m-t"> <small>Login: <strong>admin</strong></small></p> 
+            <p class="m-t"> <small>Mot de passe: <strong>admin123</strong></small></p>             
+            <p class="m-t"> <small>Pour tester en mode utilisateur, veuillez créer un compte.</small> </p> 
+           
+            <form class="m-t" role="form" action="#" [formGroup]="formLogin" *ngIf="formLogin">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Username" formControlName="userName">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" required=""
+                        formControlName="password">
+                </div>
+
+                <button (click)="login()" class="btn btn-primary block full-width m-b">Se connecter</button>
+
+                <a href="#"><small>Mot de passe oublié ?</small></a>
+                <p class="text-muted text-center"><small>Pas encore inscrit ?</small></p>
+                <a class="btn btn-sm btn-white btn-block" href="#" [routerLink]="['/register']">Créer un nouveau
+                    compte</a>
+            </form>
+            
+        </div>
+    </div>
+

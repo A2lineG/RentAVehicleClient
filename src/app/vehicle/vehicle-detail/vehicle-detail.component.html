@@ -1,0 +1,93 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Détail véhicule</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a [routerLink]="['../../../']">Home</a>
+            </li>
+            <li>
+                <a [routerLink]="['../../']">Véhicules</a>
+            </li>
+            <li class="active" *ngIf="vehicle">
+                <strong>{{ vehicle.model.brand.name }} {{ vehicle.model.name }}</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<!-- Detail -->
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox product-detail">
+                <div class="ibox-content" *ngIf="vehicle">
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="product-images">
+                                <img [src]="vehicle.model.pictureLink" alt="">
+                            </div>
+
+                        </div>
+                        <div class="col-md-5">
+
+                            <h2 class="font-bold m-b-xs">
+                                {{ vehicle.model.brand.name }} - {{ vehicle.model.name }}
+                            </h2>
+                            <small> Modèle {{ vehicle.model.name }} - {{ vehicle.year }} </small>
+                            <div class="m-t-md">
+                                <h2 class="product-main-price"> {{ vehicle.model.price }} € <small
+                                        class="text-muted">Prix de base par jour</small> </h2>
+                            </div>
+                            <hr>
+
+                            <h4>Informations</h4>
+
+                            <div class="small text-muted">
+
+                                Le prix du véhicule comprend son prix de base.
+                                <br>
+                                Celui-ci peut changer en fonction de l'age, de la période de l'année ainsi
+                                que des options ajoutées lors de la réservation.
+                            </div>
+                            <dl class="small m-t-md">
+                                <dt>Informations techniques</dt>
+                                <dd>Année : {{ vehicle.year }} </dd>
+                                <dd>Km : {{ vehicle.mileage }} km </dd>
+                                <dd>Cylindrée : {{ vehicle.model.displacement }} cv </dd>
+                                <dd>Poids : {{ vehicle.model.weight }} kg</dd>
+                                <br>
+                                <dt>Prix</dt>
+                                <dd>Prix de base : {{ vehicle.model.price }} € </dd>
+                                <dd>Distance maximale : {{ vehicle.model.distanceMax }} km </dd>
+                                <dd>Prix majoré/km : {{ vehicle.model.increasePrice }} € </dd>
+                                <br>
+                                <dt>Comprends les options suivantes</dt>
+                                <dd *ngFor="let optionVehicleVehicle of vehicle.optionVehicleVehicles">
+                                    {{optionVehicleVehicle.optionVehicle.name}}
+                                </dd>
+                            </dl>
+                            <hr>
+
+                            <div>
+                                <div class="btn-group">
+                                    <button class="btn btn-white btn-sm" [routerLink]="['../../']"><i
+                                            class="fa fa-arrow-left"></i> Retour à la liste </button>
+                                    <button class="btn btn-primary btn-sm"
+                                        [routerLink]="['../../../bookings', 'create', vehicle.id ]"><i
+                                            class="fa fa-cart-plus"></i> Réserver</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,83 @@
+<div class="wrapper wrapper-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabs-container">
+
+                <div id="tab-2" class="tab-pane">
+                    <div class="panel-body">
+
+                        <!-- tableau -->
+                        <div class="content" *ngIf="vehicle && vehicleForm">
+                            <form [formGroup]="vehicleForm">
+                                <mat-tab-group>
+                                    <mat-tab label="Détails">
+                                        <div class="wrapper wrapper-content">
+                                            <p>
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Marque"
+                                                        [value]="vehicle.model.brand.name" disabled>
+                                                </mat-form-field>
+                                            </p>
+                                            <p>
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Modèle" [value]="vehicle.model.name"
+                                                        disabled>
+                                                </mat-form-field>
+                                            </p>
+                                            <p>
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Numéro de chassis"
+                                                        [value]="vehicle.chassisNumber" disabled>
+                                                </mat-form-field>
+                                            </p>
+                                            <p>
+                                                <mat-form-field class="legacy">
+                                                    <input matInput placeholder="Numéro de plaque"
+                                                        formControlName="plateNumber">
+                                                </mat-form-field>
+                                            </p>
+                                            <p>
+                                                <mat-form-field class="legacy">
+                                                    <input matInput placeholder="Année" formControlName="year">
+                                                    <mat-error *ngIf="vehicleForm.invalid">Le format de l'année est
+                                                        incorrect.</mat-error>
+                                                </mat-form-field>
+                                            </p>
+                                            <p>
+                                                <mat-form-field class="legacy">
+                                                    <input matInput placeholder="Kilométrage" formControlName="mileage">
+                                                </mat-form-field>
+                                            </p>
+
+
+                                        </div>
+                                    </mat-tab>
+
+
+                                    <mat-tab label="Liste des options du véhicule">
+
+                                        <div class="ibox float-e-margins">
+                                            <div class="ibox-content">
+                                                <mat-selection-list formControlName="optionIds">
+                                                    <mat-list-option *ngFor="let option of optionVehicleList"
+                                                        [value]="option.id">
+                                                        {{ option.name }}
+                                                    </mat-list-option>
+                                                </mat-selection-list>
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+                                </mat-tab-group>
+                            </form>
+                            <hr>
+                            <button class="btn btn-primary" (click)="updateVehicle()"
+                                [disabled]="vehicleForm.invalid">Mettre à jour
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

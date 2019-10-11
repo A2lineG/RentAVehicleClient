@@ -1,0 +1,67 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="ibox">                
+
+                <div class="ibox-content product-box" *ngFor="let booking of bookingByClient"
+                    style="padding: 20px; margin-top: 1px; margin-bottom: 1px;">
+
+                    <div class="table-responsive">
+                        <table class="table shoping-cart-table">
+
+
+                            <tbody>
+                                <tr [routerLink]="['/bookings/detail', booking.id]" class="clickable-row">
+
+                                    <td width="200">
+                                        <img [src]="booking.vehicle.model.pictureLink" alt="">
+                                    </td>
+                                    <td class="desc">
+                                        <h3>
+                                            <div class="text-navy">
+                                                {{ booking.vehicle.model.brand.name }} -
+                                                {{ booking.vehicle.model.name }}
+                                            </div>
+                                        </h3>
+                                        <p class="small">
+                                            Année {{ booking.vehicle.year }}
+                                        </p>
+
+                                        <p class="small">
+                                            {{ booking.startDate | date: 'dd/MM/yyyy' }} -
+                                            {{ booking.endDate | date: 'dd/MM/yyyy' }}
+                                        </p>
+                                    </td>                                   
+
+                                    <td></td>
+
+                                    <td>
+                                        <h4>
+                                            € {{ booking.totalPrice }}                                            
+                                        </h4>
+                                        <p class="small">
+                                            <span
+                                                [ngClass]="{'label-primary': booking.status=='En cours', 'label-info': booking.status=='Réservé', 'label-default': booking.status=='Terminé', 'label-danger': booking.status=='Annulé'}"
+                                                class="label" >                                               
+                                                {{ booking.status }}
+                                            </span>
+
+                                        </p>
+                                    </td>
+
+                                    <td></td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

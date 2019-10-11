@@ -1,0 +1,103 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div>                        
+                        <h1 class="m-b-xs">chiffre d'affaire: € {{ chiffreAffaire }} </h1>                        
+                        <small>Locations</small>
+                    </div>
+
+                    <div>
+                        <app-line-chart></app-line-chart>
+                    </div>
+
+                    <div class="m-t-md">
+                        <small class="pull-right">
+                            <i class="fa fa-clock-o"> </i>
+                            Mise à jour le {{ date | date: 'dd/MM/yyyy' }}
+                        </small>                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="contact-box center-version">
+
+                <a href="profile.html">
+
+                    <img alt="image" width="100px" class="img-circle" src="assets/images/saitama_12295.jpg">
+
+                    <h3 class="m-b-xs"><strong>Saitama</strong></h3>
+
+                    <div class="font-bold">Administrateur</div>
+                    <p class="small">Apprenti héros</p>
+
+                </a>
+                <div class="contact-box-footer">
+                    <div class="m-t-xs btn-group">
+                        <p>
+                            <fa name="phone"></fa>
+                            +32 485 02 16 22
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-box center-version" style="text-align: center">
+
+                <address class="m-t-md">
+                    <h1>{{ date | date: 'dd/MM/yyyy' }}</h1>
+                </address>
+
+                <h2 style="color: gray; "> {{ hour | date : 'h:mm a' }} </h2>                
+                
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">Aujourd'hui</span>
+                    <h5>Nombre de véhicules</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{{ lengthVehicle }}</h1>
+                    <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-info pull-right">Utilisateurs</span>
+                    <h5>Nombre de clients</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins"> {{ lengthClient }}</h1>
+                    <div class="stat-percent font-bold text-info">40% <i class="fa fa-level-up"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-warning pull-right">Actuel</span>
+                    <h5>Chiffre d'affaire</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">€ {{ chiffreAffaire }} </h1>
+                    <div class="stat-percent font-bold text-warning">16% <i class="fa fa-level-up"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,201 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-8">
+    <h2 *ngIf="bookingDetail">Réservation {{ bookingDetail.number }}</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a [routerLink]="['../../../']">Home</a>
+      </li>
+      <li>
+        <a [routerLink]="['../../list']">Réservation</a>
+      </li>
+      <li class="active" *ngIf="bookingDetail">
+        <strong>{{ bookingDetail.vehicle.model.brand.name }} {{ bookingDetail.vehicle.model.name }}</strong>
+      </li>
+    </ol>
+  </div>
+
+  <div class="col-lg-4" *ngIf="loginService.isAdmin">
+    <div class="pull-right">
+      <button class="btn btn-primary" (click)="updateStatus()" style="margin-top: 25px;">Passer
+        au statut
+        suivant</button>
+    </div>
+  </div>
+  <div class="col-lg-4" *ngIf="loginService.isUser && bookingDetail">
+    <div class="pull-right">
+      <button *ngIf="bookingDetail.status == 'Brouillon'" class="btn btn-primary" (click)="validateBooking()"
+        style="margin-top: 25px; margin-right: 10px">Valider
+        réservation</button>
+      <button *ngIf="bookingDetail.status != 'Annulé'" class="btn btn-warning" (click)="cancelBooking()" style="margin-top: 25px">Annuler
+        réservation</button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- detail booking -->
+<div class="row">
+  <div class="col-lg-12">
+
+    <div class="wrapper wrapper-content animated fadeInUp">
+
+      <div class="ibox">
+        <div class="ibox-content" *ngIf="bookingDetail">
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="m-b-md">
+                <h2>Détail de la réservation de {{ bookingDetail.client.firstName }}
+                  {{ bookingDetail.client.surname }}</h2>
+              </div>
+
+              <dl class="dl-horizontal">
+                <dt>Status:</dt>
+                <dd><span
+                    [ngClass]="{'label-success': bookingDetail.status=='Brouillon', 'label-primary': bookingDetail.status=='En cours', 'label-info': bookingDetail.status=='Réservé', 'label-default': bookingDetail.status=='Terminé', 'label-danger': bookingDetail.status=='Annulé'}"
+                    class="label">{{ bookingDetail.status }}</span></dd>
+              </dl>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-5">
+              <dl class="dl-horizontal">
+
+                <dt>Véhicule:</dt>
+                <dd>
+                  {{ bookingDetail.vehicle.model.brand.name }} -
+                  {{ bookingDetail.vehicle.model.name }}
+                </dd>
+
+                <dt>Numéro de réservation</dt>
+                <dd> {{ bookingDetail.number }}</dd>
+
+                <dt>Prix total:</dt>
+                <dd> {{ bookingDetail.totalPrice }}€</dd>
+              </dl>
+            </div>
+
+            <div class="col-lg-7" id="cluster_info">
+              <dl class="dl-horizontal">
+
+                <dt>Date de début:</dt>
+                <dd>{{ bookingDetail.startDate | date: 'dd/MM/yyyy' }}</dd>
+
+                <dt>Datre de fin:</dt>
+                <dd> {{ bookingDetail.endDate | date: 'dd/MM/yyyy' }} </dd>
+
+                <dt>Dépot:</dt>
+                <dd>
+                  {{ bookingDetail.depot.name }}
+                </dd>
+              </dl>
+            </div>
+          </div>
+
+          <!-- Tableau -->
+
+          <div class="content" style="margin-top: 20px;">
+            <mat-tab-group>
+
+              <mat-tab label="Detail du véhicule">
+                <div class="wrapper wrapper-content">
+
+                  <div class="wrapper wrapper-content animated fadeInRight">
+
+                    <div class="row">
+                      <div class="col-lg-12">
+
+                        <div class="ibox product-detail">
+                          <div class="ibox-content">
+
+                            <div class="row">
+                              <div class="col-md-7">
+                                <div class="product-images">
+                                  <img [src]="bookingDetail.vehicle.model.pictureLink" alt="">
+                                </div>
+
+                              </div>
+                              <div class="col-md-5">
+
+                                <h2 class="font-bold m-b-xs">
+
+                                  {{ bookingDetail.vehicle.model.brand.name }} -
+                                  {{ bookingDetail.vehicle.model.name }}
+                                </h2>
+                                <small> Modèle {{ bookingDetail.vehicle.model.name }} -
+                                  {{ bookingDetail.vehicle.year }} </small>
+                                <div class="m-t-md">
+                                  <h2 class="product-main-price">
+                                    {{ bookingDetail.totalPrice }} € <small class="text-muted">Prix total</small>
+                                  </h2>
+                                </div>
+                                <hr>
+
+                                <h4>Informations</h4>
+
+                                <div class="small text-muted">
+
+                                  Le prix du véhicule comprend son prix de base.
+                                  <br>
+                                  Celui-ci peut changer en fonction de l'age, de la
+                                  période de l'année ainsi
+                                  que des options ajoutées lors de la réservation.
+                                </div>
+                                <dl class="small m-t-md">
+                                  <dt>Informations techniques</dt>
+                                  <dd>Année : {{ bookingDetail.vehicle.year }} </dd>
+                                  <dd>Km : {{ bookingDetail.vehicle.mileage }} km
+                                  </dd>
+                                  <dd>Cylindrée :
+                                    {{ bookingDetail.vehicle.model.displacement }}
+                                    cv
+                                  </dd>
+                                  <dd>Poids : {{ bookingDetail.vehicle.model.weight }}
+                                    kg</dd>
+                                  <br>
+                                  <dt>Prix</dt>
+                                  <dd>Prix de base :
+                                    {{ bookingDetail.vehicle.model.price }} € </dd>
+                                  <dd>Distance maximale :
+                                    {{ bookingDetail.vehicle.model.distanceMax }} km
+                                  </dd>
+                                  <dd>Prix majoré/km :
+                                    {{ bookingDetail.vehicle.model.increasePrice }}
+                                    € </dd>
+                                  <br>
+                                </dl>
+                                <hr>
+
+                              </div>
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </mat-tab>
+
+              <mat-tab label="Options de réservation">
+                <div class="wrapper wrapper-content">
+                  <mat-list>
+                    <mat-list-item *ngFor="let optionBookingBooking of bookingDetail.optionBookingBookings">
+                      {{ optionBookingBooking.optionBooking.name }} </mat-list-item>
+                  </mat-list>
+                </div>
+                <hr>
+              </mat-tab>
+
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,174 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Réservation</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a [routerLink]="['../../../']">Home</a>
+            </li>
+            <li>
+                <a [routerLink]="['../../']">Réservation</a>
+            </li>
+            <li class="active" *ngIf="vehicle">
+                <strong>{{ vehicle.model.brand.name }} {{ vehicle.model.name }}</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+<!-- detail bis -->
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row" *ngIf="vehicle">
+
+        <div class="col-lg-6">
+            <form [formGroup]="formBooking" *ngIf="formBooking">
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h2 class="font-bold m-b-xs" style="margin: 15px;">
+                            Choisissez votre dépôt de départ
+                        </h2>
+                    </div>
+                    <div class="ibox-content">
+                        <mat-form-field appearance="outline" style="width: 100%">
+                            <mat-label>Dépôt</mat-label>
+                            <mat-select formControlName="depotId">
+                                <mat-option *ngFor="let depot of depotList" [value]="depot.id">
+                                    {{ depot.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h2 class="font-bold m-b-xs" style="margin: 15px;">
+                            Choisissez vos dates
+                        </h2>
+                    </div>
+                    <div class="ibox-content">
+
+                      <label>Dates sélectionnées :</label>
+                      {{bookingToDB.startDate | date : 'dd/MM/yyyy'}} - {{bookingToDB.endDate | date : 'dd/MM/yyyy'}}
+
+                      <full-calendar style="margin: 10, 10, 10, 10"
+                        defaultView="dayGridMonth"
+                        [plugins]="calendarPlugins"
+                        selectable="true"
+                        [events]="events"
+                        (select)="selectDates($event)">
+                      </full-calendar>
+
+                        <!-- <div class="row">
+                             <div class="col-sm-6">
+                                <mat-form-field appearance="outline" style="width: 100%">
+                                    <input matInput [matDatepicker]="picker" placeholder="Date de départ"
+                                        formControlName="startDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <mat-form-field appearance="outline" style="width: 100%">
+                                    <input matInput [matDatepicker]="pickerRetour" placeholder="Date de retour"
+                                        formControlName="endDate">
+                                    <mat-datepicker-toggle matSuffix [for]="pickerRetour"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerRetour></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h2 class="font-bold m-b-xs" style="margin: 15px;">
+                            Voulez-vous ajouter des options en plus ?
+                        </h2>
+                    </div>
+                    <div class="ibox-content">
+                        <mat-selection-list *ngIf="optionBooking" formControlName="optionList">
+                            <mat-list-option *ngFor="let option of optionBooking" [value]="option">
+                                {{ option.name }} ({{option.priceString}})
+                            </mat-list-option>
+                        </mat-selection-list>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="content" style="margin: 15px;">
+                        <h2 class="font-bold m-b-xs">
+                            Récapitulatif de réservation
+                        </h2>
+                        <small> Véhicule {{ vehicle.model.brand.name }} - {{ vehicle.model.name }} -
+                            {{ vehicle.year }} </small>
+                        <div class="m-t-md">
+                            <h2 class="product-main-price"> {{ vehicle.model.price }} € <small class="text-muted">Prix
+                                    de base par jour</small> </h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="contentBis" style="margin: 15px;">
+                        <h4>Informations</h4>
+
+                        <div class="small text-muted">
+
+                            Le prix du véhicule comprend son prix de base.
+                            <br>
+                            Celui-ci peut changer en fonction de l'age, de la période de l'année ainsi
+                            que des options ajoutées lors de la réservation.
+                        </div>
+                        <dl class="small m-t-md">
+                            <dt>Informations techniques</dt>
+                            <dd>Année : {{ vehicle.year }} </dd>
+                            <dd>Km : {{ vehicle.mileage }} km </dd>
+                            <dd>Cylindrée : {{ vehicle.model.displacement }} cv </dd>
+                            <dd>Poids : {{ vehicle.model.weight }} kg</dd>
+                            <br>
+                            <dt>Prix</dt>
+                            <dd>Prix de base : {{ vehicle.model.price }} € </dd>
+                            <dd>Distance maximale : {{ vehicle.model.distanceMax }} km </dd>
+                            <dd>Prix majoré/km : {{ vehicle.model.increasePrice }} € </dd>
+                            <br>
+                            <dt>Comprends les options suivantes</dt>
+                            <dd *ngFor="let optionVehicle of vehicle.optionVehicleVehicles">
+                                {{optionVehicle.optionVehicle.name}}
+                            </dd>
+                        </dl>
+
+                        <div>
+                            <div class="btn-group">
+                                <button class="btn btn-white btn-sm" style="padding-left: 15px;
+                                padding-right: 15px;
+                                padding-bottom: 8px;
+                                padding-top: 8px;"
+                                [routerLink]="['../../../vehicles', 'detail', vehicle.id]"><i
+                                        class="fa fa-arrow-left"></i> Retour au détail </button>
+                                <button class="btn btn-primary btn-sm" style="padding-left: 15px;
+                                padding-right: 15px;
+                                padding-bottom: 8px;
+                                padding-top: 8px;"
+                                (click)="createBooking()"
+                                [disabled]="formBooking.invalid">
+                                    <i class="fa fa-cart-plus"></i>
+                                    Étape suivante</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

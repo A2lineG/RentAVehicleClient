@@ -1,0 +1,67 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Liste des clients</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>           
+            <li class="active">
+                <strong>Liste client</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+
+<!-- Tableau client -->
+
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+
+                    <!-- search -->
+                    <!-- <mat-form-field floatLabel="always" style="width: 100%">
+                        <input matInput placeholder="Entrez une mot clé...">                        
+                    </mat-form-field> -->
+                    <!--  -->
+
+                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                        <thead>
+                            <tr>
+                                <th data-hide="number">Nom</th>
+                                <th data-hide="startDate">Prénom</th>
+                                <th data-hide="endDate">Date de naissance</th>
+                                <th data-hide="endDate">E-mail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="select" *ngFor="let client of clientList"
+                                [routerLink]="['/clients/detail', client.id]">
+                                <td>
+                                    {{ client.surname }}
+                                </td>
+
+                                <td>
+                                    {{ client.firstName }}
+                                </td>
+
+                                <td>
+                                    {{ client.birthDate | date: 'dd/MM/yyyy' }}
+                                </td>
+
+                                <td>
+                                    {{ client.email }}
+                                </td>                               
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

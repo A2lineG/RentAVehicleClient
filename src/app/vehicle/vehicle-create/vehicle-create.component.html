@@ -1,0 +1,189 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Formulaire de création de véhicules</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>E-commerce</a>
+            </li>
+            <li class="active">
+                <strong>Product detail</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<!-- Table Form -->
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabs-container">
+                <div id="tab-2" class="tab-pane">
+                    <div class="panel-body">
+
+                        <div class="content" *ngIf="vehicleNewForm">
+                            <mat-tab-group>
+                                <mat-tab label="Détails">
+                                    <div class="wrapper wrapper-content">
+
+                                        <mat-form-field>
+                                            <mat-select placeholder="Marque" [(ngModel)]="marque">
+                                                <mat-option *ngFor="let brand of brandList" (click)="getModelByBrand()"
+                                                    [value]="brand.id">
+                                                    {{ brand.name }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <form [formGroup]="vehicleNewForm">
+                                            <div class="hr-line-dashed"></div>
+                                            <mat-form-field>
+                                                <mat-select placeholder="Modèle" formControlName="modeleId">
+                                                    <mat-option *ngFor="let model of modelList" [value]="model.id">
+                                                        {{ model.name }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <div class="hr-line-dashed"></div>
+
+                                            <mat-form-field>
+                                                <input matInput placeholder="Numéro de chassis"
+                                                    formControlName="chassisNumber" required>
+                                            </mat-form-field>
+
+                                            <div class="hr-line-dashed"></div>
+
+                                            <mat-form-field>
+                                                <input matInput placeholder="Numéro de plaque"
+                                                    formControlName="plateNumber" required>
+                                            </mat-form-field>
+
+                                            <div class="hr-line-dashed"></div>
+
+                                            <mat-form-field>
+                                                <input matInput placeholder="Année" formControlName="year" required>
+                                            </mat-form-field>
+
+                                            <div class="hr-line-dashed"></div>
+
+                                            <mat-form-field>
+                                                <input matInput placeholder="Kilométrage" formControlName="mileage"
+                                                    required>
+                                            </mat-form-field>
+                                        </form>
+                                    </div>
+                                </mat-tab>
+
+
+                                <mat-tab label="Liste des options du véhicule">
+                                    <form [formGroup]="vehicleNewForm">
+                                        <div class="ibox float-e-margins">
+                                            <div class="ibox-content">
+                                                <mat-selection-list formControlName="optionIdList">
+                                                    <mat-list-option *ngFor="let option of optionsVehicleList"
+                                                        [value]="option.id">
+                                                        {{ option.name }}
+                                                    </mat-list-option>
+                                                </mat-selection-list>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </mat-tab>
+                            </mat-tab-group>
+
+                            <hr>
+                            <button class="btn btn-primary" (click)="createBooking()"
+                                [disabled]="vehicleNewForm.invalid">
+                                Créer véhicule
+                            </button>
+                        </div>
+
+
+                        <!-- <div class="iboxMargin">
+
+                <div class="ibox-title">
+                    <h3>Création de véhicules <small>Avec choix des options</small></h3>
+                </div>
+
+
+                <div class="ibox-content">
+                    <div class="example-container" *ngIf="vehicleNewForm">
+
+                        <mat-form-field>
+                            <mat-select placeholder="Marque" [(ngModel)]="marque">
+                                <mat-option *ngFor="let brand of brandList" (click)="getModelByBrand()"
+                                    [value]="brand.id">
+                                    {{ brand.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <div class="hr-line-dashed"></div>
+                        <form [formGroup]="vehicleNewForm">
+
+                            <mat-form-field>
+                                <mat-select placeholder="Modèle" formControlName="modeleId">
+                                    <mat-option *ngFor="let model of modelList" [value]="model.id">
+                                        {{ model.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <div class="hr-line-dashed"></div>
+
+                            <mat-form-field>
+                                <input matInput placeholder="Numéro de chassis" formControlName="chassisNumber"
+                                    required>
+                            </mat-form-field>
+
+                            <div class="hr-line-dashed"></div>
+
+                            <mat-form-field>
+                                <input matInput placeholder="Numéro de plaque" formControlName="plateNumber" required>
+                            </mat-form-field>
+
+                            <div class="hr-line-dashed"></div>
+
+                            <mat-form-field>
+                                <input matInput placeholder="Année" formControlName="year" required>
+                            </mat-form-field>
+
+                            <div class="hr-line-dashed"></div>
+
+                            <mat-form-field>
+                                <input matInput placeholder="Kilométrage" formControlName="mileage" required>
+                            </mat-form-field>
+
+                            <div class="hr-line-dashed"></div>
+
+                            <h4>Liste des options</h4>
+
+
+                            <mat-selection-list formControlName="optionIdList">
+                                <mat-list-option *ngFor="let option of optionsVehicleList" [value]="option.id">
+                                    {{ option.name }}
+                                </mat-list-option>
+                            </mat-selection-list>
+
+
+                        </form>
+                    </div>
+
+                    <hr>
+                    <button class="btn btn-primary" (click)="createBooking()" [disabled]="vehicleNewForm.invalid">
+                        Créer véhicule
+                    </button>
+                </div>
+
+            </div> -->
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

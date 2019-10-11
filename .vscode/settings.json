@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/feed64de-3fb6-4c8d-b8ae-44fbe8261f41/resourceGroups/TFE/providers/Microsoft.Web/sites/RentAVehicle",
+    "appService.deploySubpath": ""
+}
